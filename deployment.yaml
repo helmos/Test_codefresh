@@ -1,22 +1,18 @@
 ---
-apiVersion: networking.istio.io/v1alpha3
-kind: VirtualService
+apiVersion: extensions/v1beta1
+kind: Deployment
 metadata:
-  name: colors
+  name: api-svc
 spec:
-  gateways:
-  - colors
-  hosts:
-  - colors.demo4591.codefresh.io
-  http:
-  - route:
-    - destination:
-        host: colors-color
-        port:
-          number: 80
-      weight: 20
-    - destination:
-        host: donating-pug-color
-        port:
-          number: 80
-      weight: 80
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: api-svc
+    spec:
+      containers:
+        - name: apisvc
+          image: httpd:latest
+          ports:
+            - containerPort: 80
+              name: http
