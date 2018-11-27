@@ -1,22 +1,4 @@
 ---
-apiVersion: extensions/v1beta1
-kind: Deployment
-metadata:
-  name: api-svc
-spec:
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: api-svc
-    spec:
-      containers:
-        - name: apisvc
-          image: httpd:latest
-          ports:
-            - containerPort: 80
-              name: http
----
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
