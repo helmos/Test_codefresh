@@ -1,0 +1,14 @@
+version: '1.0'
+mode: parallel
+steps:
+  shm:
+    type: composition
+    composition:
+      version: '3'
+    composition_candidates:
+        test_service:
+          image: docker
+          command: bash -c 'echo $TEST && docker images'
+          volumes:
+            - ${{CF_VOLUME}}:/codefresh/volume
+            - /var/run/docker.sock:/var/run/docker.sock
